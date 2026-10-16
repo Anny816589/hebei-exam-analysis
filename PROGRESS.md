@@ -7,6 +7,8 @@
 
 
 \### 完成
+- 启动 PROGRESS.md：记录开发过程
+- 待办：`git push -u origin main` 等 GitHub 网络恢复（已生成 PAT，HTTPS 方案）
 
 \- 环境验证：PATH 上有 4 个 python，目前 `python` 指向 uv cpython-3.11（含 pandas，可用）
 
@@ -31,6 +33,17 @@
 \- 2026 深入：考区分布、学历要求、招录人数
 
 \- 启动 PROBLEMS.md：固化 4 个 python 解释器问题
+## Day 2 (2026-10-16)
+
+### 今日目标
+- PROBLEMS.md 启动
+- scripts/explore_2026.py 三大分析
+
+### 完成
+（待填）
+
+### 踩坑
+（待填）
 
 
 

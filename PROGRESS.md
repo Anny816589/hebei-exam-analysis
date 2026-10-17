@@ -40,10 +40,14 @@
 - scripts/explore_2026.py 三大分析
 
 ### 完成
-（待填）
+- PROBLEMS.md 启动：沉淀 P001-P006 系统性陷阱
+- explore_2026.py：考区分布跑通，15 个考区，合计 6487 ✓
+- 工具切换：Git Bash `python` 实测 = hermes venv（全套包），PyCharm 解释器已指向它
 
 ### 踩坑
-（待填）
+- PyCharm 里 uv cpython-3.11 无 pandas（只有 pip/setuptools），必须选 hermes venv
+- PyCharm 工作目录默认是项目根，`'../data/'` 会指向错路径 → 新脚本改用 `__file__` 拼绝对路径
+- README.md 等 .md 是 GBK 编码，PyCharm 默认 UTF-8 读会乱码 → 重新加载(GBK)后再转 UTF-8
 
 
 

@@ -8,7 +8,10 @@
 
 \### 完成
 - 启动 PROGRESS.md：记录开发过程
-- 待办：`git push -u origin main` 等 GitHub 网络恢复（已生成 PAT，HTTPS 方案）
+-### 待办
+- ~~`git push -u origin main` 等 GitHub 网络恢复~~ ✅ 2026-10-17 19:01 完成，SSH 方案
+  远端：git@github.com:Anny816589/hebei-exam-analysis.git
+
 
 \- 环境验证：PATH 上有 4 个 python，目前 `python` 指向 uv cpython-3.11（含 pandas，可用）
 

@@ -32,6 +32,12 @@ def by_recruitment(df):
     # 按考区分组，只对"招录人数"这一列求和，再降序排
     return df.groupby('考区')['招录人数'].sum().sort_values(ascending=False)
 
+def by_major(df, keyword='计算机'):
+    # 1. 造掩码：专业要求里含 keyword 的行是 True，其余 False
+    mask = df['专业要求'].str.contains(keyword, na=False)
+    # 2. 用掩码筛行，只留 True 的
+    return df[mask]
+
 
 def main():
     df = load()
@@ -48,6 +54,13 @@ def main():
     print('=== 3. 各考区招录人数 ===')
     print(by_recruitment(df))
     print('全省招录总数：', df['招录人数'].sum())
+    print()
+    print('=== 4.'
+          ' 计算机类岗位 ===')
+    cs = by_major(df)
+    print('岗位数：', cs.shape[0])
+    print('招录人数：', cs['招录人数'].sum())
+    print(cs['考区'].value_counts())
 
 
 if __name__ == '__main__':

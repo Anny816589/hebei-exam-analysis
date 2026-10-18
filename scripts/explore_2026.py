@@ -38,6 +38,13 @@ def by_major(df, keyword='计算机'):
     # 2. 用掩码筛行，只留 True 的
     return df[mask]
 
+def my_real_pool(df):
+    # 三不限：专业要求这一列是空的（政府表没写专业限制）
+    mask_unlimited = df['专业要求'].isnull()
+    # 计算机类：专业要求里含"计算机"三个字
+    mask_cs = df['专业要求'].str.contains('计算机', na=False)
+    # 取"或"：两个条件满足任意一个就算我的池子
+    return df[mask_unlimited | mask_cs]
 
 def main():
     df = load()
@@ -61,6 +68,18 @@ def main():
     print('岗位数：', cs.shape[0])
     print('招录人数：', cs['招录人数'].sum())
     print(cs['考区'].value_counts())
+    print()
+    print('=== 5. 我的真实岗位池 ===')
+    mask_unlimited = df['专业要求'].isnull()
+    mask_cs = df['专业要求'].str.contains('计算机', na=False)
+    print('三不限岗位：', mask_unlimited.sum(), '个')
+    print('计算机岗位：', mask_cs.sum(), '个')
+
+    pool = my_real_pool(df)
+    print('合并池子：', pool.shape[0], '个岗位')
+    print('招录人数：', pool['招录人数'].sum())
+    print('平均每岗招：', round(pool['招录人数'].sum() / pool.shape[0], 2), '人')
+    print(pool['考区'].value_counts())
 
 
 if __name__ == '__main__':

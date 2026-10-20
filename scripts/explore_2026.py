@@ -89,6 +89,11 @@ def my_pool(df, as_fresh):
     # 政治面貌：'中共党员或共青团员' 我作为团员能报（37 个），排除时要留着
     m_party = req.str.contains('中共党员') & ~req.str.contains('共青团员')
 
+    # 基层工作经历：2026 有 35 个，全是"具有2年以上基层工作经历"。
+    # 这是「漏项」不是「误判」——Day4 建门槛清单时靠高频值推导，
+    # 中低频但致命的条件就这样漏掉了。应届生必然不满足，要排除。
+    m_exp = req.str.contains('基层工作经历')
+
     # 户籍：不限户籍的放行，限张家口市/阳原县的放行，限其他县区的一律排除
     m_hukou = req.str.contains('户籍|生源')
     m_hukou_ok = (~m_hukou) | req.str.contains('张家口市所辖|阳原县')
@@ -104,6 +109,8 @@ def my_pool(df, as_fresh):
     print('  - 定向招录    ', keep.sum())
     keep = keep & (~m_party)
     print('  - 党员限制    ', keep.sum())
+    keep = keep & (~m_exp)
+    print('  - 基层经历    ', keep.sum())
     keep = keep & m_hukou_ok
     print('  - 外地户籍    ', keep.sum())
 
